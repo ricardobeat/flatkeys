@@ -1,15 +1,14 @@
 {
   "name": "flatkeys",
   "description": "Flatten object key hierarchies into a list of strings using a custom separator.",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "index.js",
   "keywords": [
     "object keys",
     "config",
     "process.env"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "mocha": ""
   },
