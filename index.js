@@ -11,14 +11,27 @@ function prefix (pref) {
     }
 }
 
-function flatKeys (obj, sep) {
-    var sep = sep || '_', value
+function toSnakeCase (str, sep) {
+    return str.replace(/([a-z])([A-Z])/g, '$1'+sep+'$2')
+}
+
+function flatKeys (obj, options) {
+
+    var options = options        || {}
+      , sep     = options.sep    || '_'
+      , snake   = options.snake  || true
+      , filter  = options.filter || String.prototype.toLowerCase
 
     return Object.keys(obj).reduce(function(keys, key){
-        isObject(value = obj[key])
-            ? push.apply(keys, flatKeys(value, sep).map(prefix(key + sep)))
-            : push.call(keys, key)
+
+        var _key = filter.call(snake ? toSnakeCase(key, sep) : key)
+          , value = obj[key]
+
+        isObject(value)
+            ? push.apply(keys, flatKeys(value, options).map(prefix(_key + sep)))
+            : push.call(keys, _key)
         return keys
+
     }, [])
 }
 
