@@ -1,0 +1,32 @@
+{
+  "name": "flatkeys",
+  "description": "Flatten object key hierarchies into a list of strings using a custom separator.",
+  "version": "0.2.1",
+  "main": "index.js",
+  "keywords": [
+    "object keys",
+    "config",
+    "process.env"
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+    "mocha": ""
+  },
+  "files": [
+    "index.js",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ricardobeat/flatkeys.git"
+  },
+  "author": "Ricardo Tomasi <ricardobeat@gmail.com> (http://ricardo.cc)",
+  "license": {
+    "type": "MIT",
+    "url": "http://ricardo.mit-license.org"
+  }
+}
