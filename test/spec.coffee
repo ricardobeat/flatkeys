@@ -45,7 +45,43 @@ suite 'flatKeys', ->
             'two_three_deep4'
         ]
 
+    test 'converts to lowercase by default', ->
+        assert.deepEqual flatKeys({
+            ONE: 1
+            TWO: THREE: 3
+        }), [
+            'one'
+            'two_three'
+        ]
+
+    test 'converts camelCase to snake_case', ->
+        assert.deepEqual flatKeys({
+            oneThing: on
+            nestedThing: otherThing: 1
+        }), [
+            'one_thing'
+            'nested_thing_other_thing'
+        ]
+
+    test 'preserves existing separator', ->
+        assert.deepEqual flatKeys({
+            one_thing: 1
+            one_moreThing: 2
+        }), [
+            'one_thing'
+            'one_more_thing'
+        ]
+
     test 'can use a custom separator', ->
-        assert.deepEqual flatKeys({ one: two: three: 1 }, ':'), ['one:two:three']
-        assert.deepEqual flatKeys({ one: two: three: 1 }, '::'), ['one::two::three']
-        assert.deepEqual flatKeys({ zero: 0, one: two: three: 1 }, '%'), ['zero', 'one%two%three']
+        assert.deepEqual flatKeys({ one: two: three: 1 }, { sep: ':' }), ['one:two:three']
+        assert.deepEqual flatKeys({ one: two: three: 1 }, { sep: '::' }), ['one::two::three']
+        assert.deepEqual flatKeys({ zero: 0, one: two: three: 1 }, { sep: '%' }), ['zero', 'one%two%three']
+
+    test 'preserves existing custom separator', ->
+        assert.deepEqual flatKeys({
+            'one-thing': 1
+            'one-moreThing': 2
+        }, { sep: '-' }), [
+            'one-thing'
+            'one-more-thing'
+        ]
