@@ -85,3 +85,10 @@ suite 'flatKeys', ->
             'one-thing'
             'one-more-thing'
         ]
+
+    test 'without a filter', ->
+        assert.deepEqual flatKeys({
+            'aBcDEfG': 1
+        }, { filter: false, snake: false }), [
+            'aBcDEfG'
+        ]

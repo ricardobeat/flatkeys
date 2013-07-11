@@ -19,13 +19,15 @@ function flatKeys (obj, options) {
 
     var options = options        || {}
       , sep     = options.sep    || '_'
-      , snake   = options.snake  || true
-      , filter  = options.filter || String.prototype.toLowerCase
+      , snake   = options.snake  != null ? options.snake  : true
+      , filter  = options.filter != null ? options.filter : String.prototype.toLowerCase
 
     return Object.keys(obj).reduce(function(keys, key){
 
-        var _key = filter.call(snake ? toSnakeCase(key, sep) : key)
+        var _key = snake ? toSnakeCase(key, sep) : key
           , value = obj[key]
+
+        if (typeof filter === 'function') _key = filter.call(_key)
 
         isObject(value)
             ? push.apply(keys, flatKeys(value, options).map(prefix(_key + sep)))
